@@ -4,9 +4,9 @@ OUT=$(xrandr | grep -v disconnected | grep connected | grep -E -o "[A-Z0-1]{1,7}
 ifs=' '
 DISP=($OUT)
 
-if [ "${DISP[1]}" ]; then
-	echo ${DISP[0]}
-else
+if [ "${DISP[1]}" == "" ]; then
+#	echo ${DISP[0]}
+#else
 	xrandr -s 1366x768
 	exit 0
 fi
@@ -24,4 +24,4 @@ if [ "$BTN" -eq 1 ]; then
 	fi
 fi
 
-echo ${DISP[0]}
+echo -e "\U1f4bb: ${DISP[1]}"
