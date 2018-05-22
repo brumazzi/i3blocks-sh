@@ -167,6 +167,13 @@ bar {
 	workspace_buttons yes
 }
 
+bar{
+	status_command i3blocks -c /home/brumazzi/.config/i3/i3block-wintitle.cfg
+	font pango: Linux
+	workspace_buttons no
+	position top
+}
+
 exec "setxkbmap -layout us -variant alt-intl && echo 'alt_i' > ~/.config/i3/keymap-default"
 exec "feh --bg-scale /usr/share/backgrounds/default.jpg &"
 exec "sh ~/.config/i3/startup.sh"

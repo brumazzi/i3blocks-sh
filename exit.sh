@@ -6,10 +6,10 @@ act=""
 
 if [ "$BTN" -eq 1 ]; then
 	act=$(zenity --list --text="Sair?" --column="Action" Logout Suspend Hibernate Reboot Shutdown)
-#	if [ "$act" ]; then
-#		killall conky -9
+	if [ "$act" ]; then
+		killall conky -9
 #		killall nm-applet
-#	fi
+	fi
 	if [ "$act" == "Logout" ]; then
 		i3-msg exit
 	elif [ "$act" == "Suspend" ]; then
