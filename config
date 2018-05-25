@@ -124,6 +124,20 @@ bindsym $alt+Shift+8 move container to workspace 8
 bindsym $alt+Shift+9 move container to workspace 9
 bindsym $alt+Shift+0 move container to workspace 10
 
+# volume key event
+bindsym XF86AudioRaiseVolume exec "sh ~/.config/i3/audio.sh 4"
+bindsym XF86AudioLowerVolume exec "sh ~/.config/i3/audio.sh 5"
+
+# screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight +20
+bindsym XF86MonBrightnessDown exec xbacklight -20
+
+# media player
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 # reload the configuration file
 bindsym $ctrl+$alt+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
