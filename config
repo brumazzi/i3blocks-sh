@@ -142,6 +142,12 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $ctrl+$alt+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $ctrl+$alt+r restart
+
+# touchpad active buttons
+
+exec "synclient VertEdgeScroll=1"
+exec "synclient TapButton1=1"
+
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec "sh /home/brumazzi/.config/i3/exit-msg.sh"
@@ -194,3 +200,5 @@ exec "setxkbmap -layout us -variant alt-intl && echo 'alt_i' > ~/.config/i3/keym
 exec "feh --bg-scale /usr/share/backgrounds/default.jpg &"
 exec "sh ~/.config/i3/startup.sh"
 exec numlockx
+
+for_window [class="^.*"] border normal 0

@@ -8,12 +8,15 @@ DTA=$(python -c "import json; obj = json.load(open('/tmp/i3-altcoin-$1.tmp','r')
 IFS=':'
 coin=($DTA)
 
-if [ "${coin[2]}" -lt 0 ]; then
-	color='red'
-	icon='\U23ec'
-else
+UP_DOWN=$(python -c "if ${coin[2]} < 0: print(0)
+else: print(1)")
+
+if [ "$UP_DOWN" -eq 1 ]; then
 	color='green'
 	icon='\U23eb'
+else
+	color='red'
+	icon='\U23ec'
 fi
 
-echo -e "<span color='#C4A000'>${coin[0]}: ${coin[1]}</span> <span color='$color'>${coin[2]}$icon</span>"
+[[ "${coin[0]}" ]] && echo -e "<span color='#C4A000'>${coin[0]}: ${coin[1]}</span> <span color='$color'>${coin[2]}$icon</span>"

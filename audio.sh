@@ -28,7 +28,7 @@ elif [ "$VOL" -le 30 ]; then
 	SYMB="<span font_desc='EmojiSymbols'>\U0001f508</span>"
 elif [ "$VOL" -le 80 ]; then
 	SYMB="<span font_desc='EmojiSymbols'>\U0001f509</span>"
-elif [ "$VOL" -le 100 ]; then
+elif [ "$VOL" -le 150 ]; then
 	SYMB="<span font_desc='EmojiSymbols'>\U0001f50a</span>"
 fi
 
