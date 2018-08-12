@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TEMP=$(sensors | grep Physical | grep -E -o "[0-9]{1,3}.[0-9]{1}" | head -1)
+TEMP=$(sensors | grep Package | grep -E -o "[0-9]{1,3}.[0-9]{1}" | head -1)
 
 IFS='.'
 info=($TEMP)

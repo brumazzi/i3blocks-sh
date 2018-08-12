@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PROCS="conky" # nm-applet"
+#PROCS="conky nm-applet"
 
 for proc in $PROCS; do
 	( 

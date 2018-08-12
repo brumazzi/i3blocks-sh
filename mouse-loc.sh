@@ -6,3 +6,4 @@ IFS='
 pos=($MPOS)
 
 echo -e "\U1f5b1 ${pos[0]}x${pos[1]}"
+

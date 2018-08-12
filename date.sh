@@ -19,9 +19,9 @@ CLOCKS30=($CLOCK_LIST_30)
 let H="$HOUR % 12"
 M=$(date '+%M')
 if [ "$M" -le 30 ]; then
-	CLOCK="${CLOCKS00[$H]}"
+	CLOCK="<span color='#ccc'>${CLOCKS00[$H]}</span>"
 else
-	CLOCK="${CLOCKS30[$H]}"
+	CLOCK="<span color='#ccc'>${CLOCKS30[$H]}</span>"
 fi
 
 if [ "$HOUR" -ge 6 ] && [ "$HOUR" -le 18 ]; then
@@ -30,4 +30,6 @@ else
 	SYMB="<span color='#727FeF'>☪</span>"
 fi
 
-echo -e "<b>\U1f4c5</b> $(date '+%a %d %b') $CLOCK $(date '+%H:%M') <b>$SYMB</b>"
+CALENDAR="<span color='#fff'>\U1f4c5</span>"
+
+echo -e "$CALENDAR $(date '+%a %d %b') $CLOCK $(date '+%H:%M') <b>$SYMB</b>"
