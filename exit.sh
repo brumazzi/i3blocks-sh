@@ -22,3 +22,5 @@ if [ "$BTN" -eq 1 ]; then
 		gksudo poweroff
 	fi
 fi
+
+echo -e "\U1f6aa"

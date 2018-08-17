@@ -235,6 +235,7 @@ bar {
   }
 }
 
+exec "(/usr/bin/compton --config ~/.compton.conf~.i3/config &)"
 exec "setxkbmap -layout us -variant alt-intl && echo 'alt_i' > ~/.config/i3/keymap-default"
 #exec "feh --bg-scale /usr/share/backgrounds/default.jpg &"
 exec "sh ~/.config/i3/startup.sh"

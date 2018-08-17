@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source ~/.config/i3/color.sh
+
 [[ "$1" ]] || exit 0
 coin=$(curl --request GET  https://api.coinmarketcap.com/v1/ticker/$1/)
 echo $coin > /tmp/i3-altcoin-$1.tmp
@@ -12,11 +14,11 @@ UP_DOWN=$(python -c "if ${coin[2]} < 0: print(0)
 else: print(1)")
 
 if [ "$UP_DOWN" -eq 1 ]; then
-	color='green'
-	icon='\U23eb'
+	color=$GREEN
+	icon='\U1f4c8'
 else
-	color='red'
-	icon='\U23ec'
+	color=$RED
+	icon='\U1f4c9'
 fi
 
-[[ "${coin[0]}" ]] && echo -e "<span color='#C4A000'>${coin[0]}: ${coin[1]}</span> <span color='$color'>${coin[2]}$icon</span>"
+[[ "${coin[0]}" ]] && echo -e "<span color='$YELLOW'>${coin[0]}: ${coin[1]}</span> <span color='$color'><b>${coin[2]} $icon</b></span>"

@@ -27,4 +27,4 @@ if [ "$BTN" -eq 1 ]; then
 	fi
 fi
 
-echo -e "\U1f4bb: ${DISP[1]}"
+echo -e "<b>\U1f4bb: ${DISP[1]}</b>"

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source ~/.config/i3/color.sh
+
 [[ "$1" ]] && BTN=$1 || BTN=0
 VOL=$(amixer get Master | grep -E -o '[%[0-9]{1,3}%]' | head -1 | grep -E -o '[0-9]{1,3}')
 
@@ -34,4 +36,4 @@ fi
 
 amixer sset 'Master' "${VOL}%" > /dev/zero
 
-echo -e "<b>$SYMB:</b> ${VOL}%"
+echo -e "<span color='$BLUE_GRAY_1'><b>$SYMB:</b> ${VOL}%</span>"

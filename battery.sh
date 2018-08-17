@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ~/.config/i3/color.sh
+
 ACAD=$(cat /sys/class/power_supply/ACAD/online)
 [[ -d "/sys/class/power_supply/BAT0" ]] && BAT=/sys/class/power_supply/BAT0 ||
 [[ -d "/sys/class/power_supply/BAT1" ]] && BAT=/sys/class/power_supply/BAT1 || exit 1
@@ -34,12 +36,14 @@ else
 	SYMB="\U1f50b"
 fi
 
-COLOR="green"
+COLOR=$GREEN
 PORC=$(porcent)
 if [ "$PORC" -le 15 ]; then
-	COLOR="red"
+	COLOR=$RED
 elif [ "$PORC" -le 30 ]; then
-	COLOR="yellow"
+	COLOR=$ORANGE
+elif [ "$PORC" -le 60 ]; then
+	COLOR=$YELLOW
 fi
 
 echo -e "<span color='$COLOR'>$SYMB: $PORC%</span>"
