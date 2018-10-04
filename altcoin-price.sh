@@ -3,7 +3,7 @@
 source ~/.config/i3/color.sh
 
 [[ "$1" ]] || exit 0
-coin=$(curl --request GET  https://api.coinmarketcap.com/v1/ticker/$1/)
+coin=$(curl --request GET  https://api.coinmarketcap.com/v1/ticker/$1/) || exit 0
 echo $coin > /tmp/i3-altcoin-$1.tmp
 
 DTA=$(python -c "import json; obj = json.load(open('/tmp/i3-altcoin-$1.tmp','r'))[0]; print(\"%s:%s:%s\" %(obj['name'],obj['price_usd'],obj['percent_change_24h']))")

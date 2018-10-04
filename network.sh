@@ -30,4 +30,5 @@ elif [ "$WLAN" ]; then
 	IP="\U1f30e: $WIP"
 fi
 
+[[ $IP ]] || exit 0
 echo -e "<span color='$YELLOW'>$IP</span>"

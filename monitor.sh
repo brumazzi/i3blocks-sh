@@ -2,7 +2,7 @@
 
 OUT=$(xrandr | grep -v disconnected | grep connected | grep -E -o "[A-Z0-1]{1,7}" | grep [A-Z])
 ifs=' '
-DISP=($OUT)
+export DISP=($OUT)
 
 if [ "${DISP[1]}" == "" ]; then
 #	echo ${DISP[0]}
@@ -27,4 +27,4 @@ if [ "$BTN" -eq 1 ]; then
 	fi
 fi
 
-echo -e "<b>\U1f4bb: ${DISP[1]}</b>"
+echo -e "\U1f4bb: <b>${DISP[1]}</b>"
