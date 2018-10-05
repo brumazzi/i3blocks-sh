@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ~/.config/i3/color.sh
+source ~/.config/i3/progress-bar.sh
 
 MEM_FILE="/proc/meminfo"
 MEM_TEXT_L="- - M E M O R Y - -"
@@ -26,58 +27,8 @@ function porcent_swap {
 	echo $PORC | cut -c 1-6
 }
 
-function progress_mem {
-	MAX=$1
-	CUR=$2
-	PORC=$(echo "$CUR*10/$MAX" | bc )
-	let i=0
-	echo -n "<b>" 
-	while [ $i -lt 10 ]; do
-		if [ "${MEM_TEXT[$i]}" == "-" ]; then
-			if [ $i -le $PORC ]; then
-				echo -n "<span background='$PROGRESS_MEM_BG' color='$PROGRESS_MEM_BG'>#</span>"
-			else
-				echo -n "<span background='$PROGRESS_OFF' color='$PROGRESS_OFF'>#</span>"
-			fi
-		else
-			if [ $i -le $PORC ]; then
-				echo -n "<span background='$PROGRESS_MEM_BG' color='$PROGRESS_TEXT'>${MEM_TEXT[$i]}</span>"
-			else
-				echo -n "<span background='$PROGRESS_OFF' color='$PROGRESS_TEXT'>${MEM_TEXT[$i]}</span>"
-			fi
-		fi
-		let i=$i+1
-	done
-	echo -n "</b>" 
-}
-
-function progress_swap {
-	MAX=$1
-	CUR=$2
-	PORC=$(echo "$CUR*10/$MAX" | bc )
-	let i=0
-	echo -n "<b>" 
-	while [ $i -lt 10 ]; do
-		if [ "${SWP_TEXT[$i]}" == "-" ]; then
-			if [ $i -le $PORC ]; then
-				echo -n "<span background='$PROGRESS_SWAP_BG' color='$PROGRESS_SWAP_BG'>#</span>"
-			else
-				echo -n "<span background='$PROGRESS_OFF' color='$PROGRESS_OFF'>#</span>"
-			fi
-		else
-			if [ $i -le $PORC ]; then
-				echo -n "<span background='$PROGRESS_SWAP_BG' color='$PROGRESS_TEXT'>${SWP_TEXT[$i]}</span>"
-			else
-				echo -n "<span background='$PROGRESS_OFF' color='$PROGRESS_TEXT'>${SWP_TEXT[$i]}</span>"
-			fi
-		fi
-		let i=$i+1
-	done
-	echo -n "</b>" 
-}
-
 if [ "$1" == "MEM" ]; then
-	progress_mem $MEM_MAX $MEM_AVAL
+	progress_bar $MEM_MAX $MEM_AVAL "$MEM_TEXT_L" $PROGRESS_MEM_BG 10
 elif [ "$1" == "SWAP" ]; then
-	progress_swap $SWAP_MAX $SWAP_FREE
+	progress_bar $SWAP_MAX $SWAP_FREE "$SWP_TEXT_L" $PROGRESS_SWAP_BG 10
 fi
