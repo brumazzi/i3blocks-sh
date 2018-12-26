@@ -4,6 +4,10 @@
 
 #sh ~/.config/i3/sync_clock.sh
 
+cd ~/.config/i3/
+git push origin master
+cd -
+
 for proc in $PROCS; do
 	( 
 		sleep 1
