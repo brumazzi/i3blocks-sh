@@ -8,7 +8,7 @@ function update_weather {
 	if [ "$(cat /tmp/WEATHER.tmp)" -eq "1" ]; then return 1; fi
 	printf 1 > /tmp/WEATHER.tmp
 	while [ "$(cat /tmp/WEATHER.tmp)" ]; do
-		curl http://wttr.in/nova_andradina > /tmp/weather-all.tmp
+		curl http://wttr.in/guariba > /tmp/weather-all.tmp
 		WEATHER_INFO="$(cat /tmp/weather-all.tmp | head -4 | tail -n 2)"
 		W_STAGE=$(echo $WEATHER_INFO | grep -E -o '[a-zA-Z]{3,32}')
 		W_STAGE=$(echo $W_STAGE)
@@ -71,7 +71,7 @@ else
 		SYMB="$CLOUD"
 	elif [ "$W_STAGE" == "Patchy rain possible" ]; then
 		SYMB="$SUN_RAIN"
-	elif [ "$W_STAGE" == "" ]; then
+	elif [ "$W_STAGE" == "Torrential rain shower"] || [ "$W_STAGE" == "Moderate rain" ] || [ "$W_STAGE" == "Heavy rain" ] || [ "$W_STAGE" == "Rain" ] || [ "$W_STAGE" == "Light Drizzle" ]; then
 		SYMB="$RAIN"
 	elif [ "$W_STAGE" == "" ]; then
 		SYMB="$LIGHTNING_RAIN"

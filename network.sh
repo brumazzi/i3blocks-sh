@@ -1,6 +1,18 @@
 #!/bin/sh
 
 source ~/.config/i3/color.sh
+source ~/.config/i3/progress-bar.sh
+
+function network_bytes {
+	LAST=$(cat /tmp/network-bytes.tmp)
+	if [ $LAST ]; then
+		echo "$LAST-$(cat /sys/class/net/$1/statistics/rx_bytes)" | bc
+	else
+		cat /sys/class/net/$1/statistics/rx_bytes
+	fi
+
+	cat /sys/class/net/$1/statistics/rx_bytes > /tmp/network-bytes.tmp
+}
 
 btn=0
 [[ "$1" ]] && btn=$1
@@ -20,15 +32,21 @@ if [ "$EIP" ] && [ "$WIP" ]; then
 	DATE=$(date '+%S')
 	MOD=$(echo "$DATE % 2" | bc)
 	if [ "$MOD" -eq 1 ]; then
-		IP="<b>\U1f5a7</b>: $EIP"
+		ICON="<b>\U1f5a7</b>"
+		IP="$EIP"
 	else
-		IP="\U1f30e: $WIP"
+		ICON="<b>\U1f30e</b>"
+		IP="$WIP"
 	fi
 elif [ "$EIP" ]; then
-	IP="<b>\U1f5a7</b>: $EIP"
+	ICON="<b>\U1f5a7</b>"
+	IP="$EIP"
 elif [ "$WLAN" ]; then
-	IP="\U1f30e: $WIP"
+	ICON="<b>\U1f30e</b>"
+	IP="$WIP"
 fi
 
 [[ $IP ]] || exit 0
-echo -e "<span color='$YELLOW'>$IP</span>"
+
+echo -e "<span color='$YELLOW'>$ICON: $IP</span>"
+#echo -e "$ICON: $(progress_bar 10 6 "$(text_split "$IP" 16)" $YELLOW 16)"

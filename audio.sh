@@ -1,6 +1,7 @@
 #!/bin/sh
 
 source ~/.config/i3/color.sh
+source ~/.config/i3/progress-bar.sh
 
 [[ "$1" ]] && BTN=$1 || BTN=0
 VOL=$(amixer get Master | grep -E -o '[%[0-9]{1,3}%]' | head -1 | grep -E -o '[0-9]{1,3}')
@@ -30,7 +31,7 @@ elif [ "$VOL" -le 30 ]; then
 	SYMB="<span font_desc='EmojiSymbols'>\U0001f508</span>"
 elif [ "$VOL" -le 80 ]; then
 	SYMB="<span font_desc='EmojiSymbols'>\U0001f509</span>"
-elif [ "$VOL" -le 150 ]; then
+elif [ "$VOL" -le 100 ]; then
 	SYMB="<span font_desc='EmojiSymbols'>\U0001f50a</span>"
 fi
 

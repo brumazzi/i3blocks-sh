@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OUT=$(xrandr | grep -v disconnected | grep connected | grep -E -o "[A-Z0-1]{1,7}" | grep [A-Z])
+OUT=$(xrandr | grep connected | grep -v disconnected | awk -F' ' '{print $1}')
 ifs=' '
 export DISP=($OUT)
 

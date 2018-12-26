@@ -29,6 +29,12 @@ function porcent(){
 	printf "${pct}"
 }
 
+function shut_down(){
+	notify-send -u critical -t 10000 "Bateria crítica" "O computador desligará em 5 segundos!"
+	sleep 5
+	sudo pm-suspend
+}
+
 SYMB=
 if [ "$(acad_on)" == "1" ]; then
 	SYMB="\U1f50c"
@@ -40,6 +46,7 @@ COLOR=$GREEN
 PORC=$(porcent)
 if [ "$PORC" -le 15 ]; then
 	COLOR=$RED
+	shut_down
 elif [ "$PORC" -le 30 ]; then
 	COLOR=$ORANGE
 elif [ "$PORC" -le 60 ]; then

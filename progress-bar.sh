@@ -4,6 +4,16 @@ source ~/.config/i3/color.sh
 
 HTML_FMT="<span background='%s' color='%s'>%s</span>"
 
+function text_split {
+	PY_COMM="w=''
+for i in '$1':
+	w=w+i+' '
+for i in range($2-len('$1')):
+	w=w+'- '
+print(w)"
+	python -c "$PY_COMM"
+}
+
 function progress_bar {
 	MAX=$1
 	CUR=$2
