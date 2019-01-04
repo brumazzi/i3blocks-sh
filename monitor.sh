@@ -19,7 +19,7 @@ BTN=0
 if [ "$BTN" -eq 1 ]; then
 	MON1=$(zenity --list --column=Monitor $OUT)
 
-	if [ "$MON1" == "HDMI1" ]; then
+	if [ "$MON1" == "HDMI1" ] || [ "$MON1" == "HDMI-1" ]; then
 		xrandr --output ${DISP[0]} --mode 1366x768 --output $MON1 --mode 1366x768 --same-as ${DISP[0]}
 		pactl set-card-profile 0 output:hdmi-stereo+input:analog-stereo
 	else
