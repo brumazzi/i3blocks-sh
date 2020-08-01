@@ -8,14 +8,17 @@ function update_weather {
 	if [ "$(cat /tmp/WEATHER.tmp)" -eq "1" ]; then return 1; fi
 	printf 1 > /tmp/WEATHER.tmp
 	while [ "$(cat /tmp/WEATHER.tmp)" ]; do
-		curl http://wttr.in/guariba > /tmp/weather-all.tmp
-		WEATHER_INFO="$(cat /tmp/weather-all.tmp | head -4 | tail -n 2)"
-		W_STAGE=$(echo $WEATHER_INFO | grep -E -o '[a-zA-Z]{3,32}')
-		W_STAGE=$(echo $W_STAGE)
-		W_TEMPERATURE=$(echo $WEATHER_INFO | grep -E -o "[m0-9]{5,8}" | awk -F'm' '{print $2}')
-		printf "%s;%s" "$W_STAGE" "$W_TEMPERATURE" > /tmp/WEATHER_INFO.tmp
+	#	curl http://wttr.in/Sao_carlos > /tmp/weather-all.tmp
+	#	WEATHER_INFO="$(cat /tmp/weather-all.tmp | head -4 | tail -n 2)"
+	#	W_STAGE=$(echo $WEATHER_INFO | grep -E -o '[a-zA-Z]{3,32}')
+	#	W_STAGE=$(echo $W_STAGE)
+	#	W_TEMPERATURE=$(echo $WEATHER_INFO | grep -E -o "[m0-9]{5,8}" | awk -F'm' '{print $2}')
+	#	printf "%s;%s" "$W_STAGE" "$W_TEMPERATURE" > /tmp/WEATHER_INFO.tmp
+		WEATHER_INFO="$(curl http://wttr.in/Sao_carlos?format=1)"
+		printf "$WEATHER_INFO" > /tmp/WEATHER_INFO.tmp
 		sleep 300
 	done
+	
 }
 
 update_weather &
@@ -46,15 +49,15 @@ WEAT="$(cat /tmp/WEATHER_INFO.tmp)"
 W_STAGE=$(echo $WEAT | grep -E -o '[a-z A-Z]{4,32}' | awk -F' ;' '{print $1}')
 W_STAGE=$(echo "print '$W_STAGE'.strip()" | python2)
 
-CLOUD="<span color='$BLUE'>\U2601</span>"
-SUN_CLOUD="<span color='$BLUE_GRAY_2'>\U1f324</span>"
-SUN="<span color='$YELLOW'>\U1f31e</span>"
-SUN_RAIN="<span color='$BLUE_GRAY_1'>\U1f326</span>"
-RAIN="<span color='$CYAN'>\U1f327</span>"
-LIGHTNING_RAIN="<span color='$YELLOW'>\U26c8</span>"
-LIGHTNING="<span color='$YELLOW'>\U1f329</span>"
-MOON="<span color='$BLUE_2'>\U1f319</span>"
-FOG="<span color='$GRAY'>\U1f32b</span>"
+#CLOUD="<span color='$BLUE'>\U2601</span>"
+#SUN_CLOUD="<span color='$BLUE_GRAY_2'>\U1f324</span>"
+#SUN="<span color='$YELLOW'>\U1f31e</span>"
+#SUN_RAIN="<span color='$BLUE_GRAY_1'>\U1f326</span>"
+#RAIN="<span color='$CYAN'>\U1f327</span>"
+#LIGHTNING_RAIN="<span color='$YELLOW'>\U26c8</span>"
+#LIGHTNING="<span color='$YELLOW'>\U1f329</span>"
+#MOON="<span color='$BLUE_2'>\U1f319</span>"
+#FOG="<span color='$GRAY'>\U1f32b</span>"
 
 if [ "$W_STAGE" == "Clear" ]; then
 	if [ "$HOUR" -ge 6 ] && [ "$HOUR" -le 18 ]; then
@@ -71,8 +74,8 @@ else
 		SYMB="$CLOUD"
 	elif [ "$W_STAGE" == "Patchy rain possible" ]; then
 		SYMB="$SUN_RAIN"
-	elif [ "$W_STAGE" == "Torrential rain shower"] || [ "$W_STAGE" == "Moderate rain" ] || [ "$W_STAGE" == "Heavy rain" ] || [ "$W_STAGE" == "Rain" ] || [ "$W_STAGE" == "Light Drizzle" ]; then
-		SYMB="$RAIN"
+	#elif [ "$W_STAGE" == "Torrential rain shower"] || [ "$W_STAGE" == "Moderate rain" ] || [ "$W_STAGE" == "Heavy rain" ] || [ "$W_STAGE" == "Rain" ] || [ "$W_STAGE" == "Light Drizzle" ]; then
+	#	SYMB="$RAIN"
 	elif [ "$W_STAGE" == "" ]; then
 		SYMB="$LIGHTNING_RAIN"
 	elif [ "$W_STAGE" == "" ]; then
@@ -91,4 +94,4 @@ TCELL[1]=$(echo $WEAT | grep -E -o '[0-9]{1,3}' | tail -n 1)
 
 CELL="$([[ "${TCELL[0]}" -eq "${TCELL[1]}" ]] && echo "${TCELL[0]}" || echo "${TCELL[0]} - ${TCELL[1]}") °C"
 
-echo -e "<b>$CALENDAR $(date '+%a %d %b') $CLOCK $(date '+%H:%M') <b>$SYMB</b> ${CELL}</b>"
+echo -e "<b>$CALENDAR $(date '+%a %d %b') $CLOCK $(date '+%H:%M') <b>$WEAT</b></b>"

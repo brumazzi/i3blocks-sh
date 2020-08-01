@@ -180,6 +180,8 @@ bindsym $mod+Tab workspace next
 # volume key event
 bindsym XF86AudioRaiseVolume exec "sh ~/.config/i3/audio.sh 4"
 bindsym XF86AudioLowerVolume exec "sh ~/.config/i3/audio.sh 5"
+bindsym $mod+plus exec "sh ~/.config/i3/audio.sh 4"
+bindsym $mod+minus exec "sh ~/.config/i3/audio.sh 5"
 
 # screen brightness
 bindsym XF86MonBrightnessUp exec xbacklight +20
@@ -199,6 +201,7 @@ bindsym $ctrl+$alt+r restart
 # touchpad active buttons
 exec "synclient VertEdgeScroll=1"
 exec "synclient TapButton1=1"
+exec "sh ~/.config/i3/sync_clock.sh"
 
 # lock screen
 bindsym $ctrl+$alt+l exec "i3lock -i ~/.config/i3/lock.png"
@@ -236,7 +239,7 @@ bar {
   }
 }
 
-exec "(/usr/bin/compton --config ~/.compton.conf~.i3/config &)"
+#exec "(/usr/bin/compton --config ~/.compton.conf~.i3/config &)"
 exec "setxkbmap -layout us -variant alt-intl && echo 'alt_i' > ~/.config/i3/keymap-default"
 #exec "feh --bg-scale /usr/share/backgrounds/default.jpg &"
 exec "sh ~/.config/i3/startup.sh"

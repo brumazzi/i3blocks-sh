@@ -30,6 +30,6 @@ I3 blocks with with sh modules
 * xbacklight
 * mate-terminal
 * dmenu
-* i3-dmenu-desktop
+* j4-dmenu-desktop
 * morc_menu
 * python3

@@ -3,15 +3,30 @@
 source ~/.config/i3/color.sh
 
 [[ "$1" ]] || exit 0
-coin=$(curl --request GET  https://api.coinmarketcap.com/v1/ticker/$1/) || exit 0
-echo $coin > /tmp/i3-altcoin-$1.tmp
+coins=$(curl https://bitpay.com/api/rates)
 
-DTA=$(python -c "import json; obj = json.load(open('/tmp/i3-altcoin-$1.tmp','r'))[0]; print(\"%s:%s:%s\" %(obj['name'],obj['price_usd'],obj['percent_change_24h']))")
+echo $coin > /tmp/alt-coin-rate.tmp
+
+DTA=$(python -c "
+import json
+coin_list = json.load('$coin')
+#for coin in coin_list:
+#	print(coin)
+	# if coin['code'] == '$1':
+	#	print(\"%s:%s\" %(coin['name'], coin['rate']))
+")
 IFS=':'
 coin=($DTA)
 
-UP_DOWN=$(python -c "if ${coin[2]} < 0: print(0)
-else: print(1)")
+echo "##############################"
+echo $DTA
+exit 0
+
+UP_DOWN=$(
+python -c "if ${coin[2]} < 0:
+	print(0)
+else:
+	print(1)")
 
 if [ "$UP_DOWN" -eq 1 ]; then
 	color=$GREEN

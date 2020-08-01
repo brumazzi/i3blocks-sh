@@ -27,4 +27,6 @@ if [ "$BTN" -eq 1 ]; then
 	fi
 fi
 
+#xrandr --output ${DISP[0]} --mode 1366x768 --output ${DISP[1]} --mode 1366x768 --same-as ${DISP[0]}
+
 echo -e "\U1f4bb: <b>${DISP[1]}</b>"

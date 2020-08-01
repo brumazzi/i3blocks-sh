@@ -10,7 +10,7 @@ IFS='
 pos=($MPOS)
 
 if	[ "${pos[0]}" -ge 4 ] && [ "${pos[1]}" -ge 4 ] &&
-	[ "${pos[0]}" -le 24 ] && [ "${pos[1]}" -le 24 ]; then
+	[ "${pos[0]}" -le 24 ] && [ "${pos[1]}" -le 24 ] ; then
 	echo "<span color='$EARTH_OWL'><b>Hoohoooo!</b></span>"
 	exit 0
 fi

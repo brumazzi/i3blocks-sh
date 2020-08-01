@@ -4,7 +4,7 @@ source ~/.config/i3/color.sh
 source ~/.config/i3/progress-bar.sh
 
 [[ "$1" ]] && BTN=$1 || BTN=0
-VOL=$(amixer get Master | grep -E -o '[%[0-9]{1,3}%]' | head -1 | grep -E -o '[0-9]{1,3}')
+VOL=$(amixer get Master -c 4 | grep -E -o '[%[0-9]{1,3}%]' | head -1 | grep -E -o '[0-9]{1,3}')
 
 if [ "$BTN" -eq 1 ]; then
 	#(
@@ -35,6 +35,6 @@ elif [ "$VOL" -le 100 ]; then
 	SYMB="<span font_desc='EmojiSymbols'>\U0001f50a</span>"
 fi
 
-amixer sset 'Master' "${VOL}%" > /dev/zero
+amixer sset 'Master' "${VOL}%" -c 4 > /dev/zero
 
 echo -e "<span color='$BLUE_GRAY_1'><b>$SYMB:</b> ${VOL}%</span>"
