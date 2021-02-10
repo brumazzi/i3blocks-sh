@@ -16,4 +16,4 @@ else
 	color=$GREEN
 fi
 
-echo -n -e "<span color='$color'>\U1f321</span>: $TEMP°"
+echo -e "<span color='$color'>\U1f321</span>: $TEMP°"
