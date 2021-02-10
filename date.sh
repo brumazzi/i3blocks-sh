@@ -8,22 +8,15 @@ function update_weather {
 	if [ "$(cat /tmp/WEATHER.tmp)" -eq "1" ]; then return 1; fi
 	printf 1 > /tmp/WEATHER.tmp
 	while [ "$(cat /tmp/WEATHER.tmp)" ]; do
-	#	curl http://wttr.in/Sao_carlos > /tmp/weather-all.tmp
-	#	WEATHER_INFO="$(cat /tmp/weather-all.tmp | head -4 | tail -n 2)"
-	#	W_STAGE=$(echo $WEATHER_INFO | grep -E -o '[a-zA-Z]{3,32}')
-	#	W_STAGE=$(echo $W_STAGE)
-	#	W_TEMPERATURE=$(echo $WEATHER_INFO | grep -E -o "[m0-9]{5,8}" | awk -F'm' '{print $2}')
-	#	printf "%s;%s" "$W_STAGE" "$W_TEMPERATURE" > /tmp/WEATHER_INFO.tmp
-		WEATHER_INFO="$(curl http://wttr.in/Sao_carlos?format=1)"
+		WEATHER_INFO="$(curl http://wttr.in/$1?format=1)"
 		printf "$WEATHER_INFO" > /tmp/WEATHER_INFO.tmp
 		sleep 300
 	done
 	
 }
-
 update_weather &
 
-[[ "$1" ]] && BTN=$1
+[[ "$2" ]] && BTN=$2
 
 if [ "$BTN" -eq 1 ]; then
 	(zenity --calendar) &
