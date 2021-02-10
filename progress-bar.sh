@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.config/i3/color.sh
+source ~/.i3blocks/color.sh
 
 HTML_FMT="<span background='%s' color='%s'>%s</span>"
 
@@ -44,6 +44,6 @@ function progress_bar {
 		fi
 		let I=$I+1
 	done
-	printf "</b>"
+	printf "</b>\n"
 }
 

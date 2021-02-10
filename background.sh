@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_IMD="$HOME/.config/i3/bg/$1"
+_IMD="$HOME/.i3blocks/bg/$1"
 _TMPF="/tmp/i3bg.tmpF"
 _TMPM="/tmp/i3bg.tmpM"
 _TMP="/tmp/i3bg.tmp"

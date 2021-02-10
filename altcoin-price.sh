@@ -1,34 +1,18 @@
 #!/bin/sh
 
-source ~/.config/i3/color.sh
+source ~/.i3blocks/color.sh
 
 [[ "$1" ]] || exit 0
-coins=$(curl https://bitpay.com/api/rates)
+coins=$(curl https://poloniex.com/public?command=returnTicker)
 
-echo $coin > /tmp/alt-coin-rate.tmp
+DTA=$(echo "let coinsJSON = $coins; console.log(\`\${parseFloat(coinsJSON.$1.last).toFixed(2)}:\${parseFloat(coinsJSON.$1.percentChange).toFixed(2)}\`)" | node)
 
-DTA=$(python -c "
-import json
-coin_list = json.load('$coin')
-#for coin in coin_list:
-#	print(coin)
-	# if coin['code'] == '$1':
-	#	print(\"%s:%s\" %(coin['name'], coin['rate']))
-")
-IFS=':'
-coin=($DTA)
+price=$(echo $DTA | awk -F: '{ print $1 }')
+changed=$(echo $DTA | awk -F: '{ print $2 }')
+price_grow=$(echo "console.log($changed > 0 ? 1 : 0)" | node)
+coin=$(echo $1 | awk -F_ '{ print $2 }')
 
-echo "##############################"
-echo $DTA
-exit 0
-
-UP_DOWN=$(
-python -c "if ${coin[2]} < 0:
-	print(0)
-else:
-	print(1)")
-
-if [ "$UP_DOWN" -eq 1 ]; then
+if [ "$price_grow" -eq 1 ]; then
 	color=$GREEN
 	icon='\U1f4c8'
 else
@@ -36,4 +20,4 @@ else
 	icon='\U1f4c9'
 fi
 
-[[ "${coin[0]}" ]] && echo -e "<span color='$YELLOW'>${coin[0]}: ${coin[1]}</span> <span color='$color'><b>${coin[2]} $icon</b></span>"
+[[ "$1" ]] && echo -e "<span><b>$coin:</b></span><span color='$GRAY'><b>💲${price}</b></span> - <span color='$color'><b>${changed} $icon</b></span>"

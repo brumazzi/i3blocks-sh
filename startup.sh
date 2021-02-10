@@ -2,9 +2,9 @@
 
 #PROCS="conky nm-applet"
 
-#sh ~/.config/i3/sync_clock.sh
+#sh ~/.i3blocks/sync_clock.sh
 
-cd ~/.config/i3/
+cd ~/.i3blocks/
 git push origin master
 cd -
 
@@ -13,7 +13,7 @@ for proc in $PROCS; do
 		sleep 1
 		[[ "$(pgrep $proc)" ]] && echo $proc up ||
 		if [ "$proc" == "conky" ]; then
-			$proc -c ~/.config/i3/conky.conf
+			$proc -c ~/.i3blocks/conky.conf
 		else
 			$proc
 		fi

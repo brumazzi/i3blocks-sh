@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.config/i3/color.sh
+source ~/.i3blocks/color.sh
 
 ACAD=$(cat /sys/class/power_supply/ACAD/online)
 [[ -d "/sys/class/power_supply/BAT0" ]] && BAT=/sys/class/power_supply/BAT0 ||

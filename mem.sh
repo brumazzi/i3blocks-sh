@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ~/.config/i3/color.sh
-source ~/.config/i3/progress-bar.sh
+source ~/.i3blocks/color.sh
+source ~/.i3blocks/progress-bar.sh
 
 MEM_FILE="/proc/meminfo"
 MEM_TEXT_L="- - M E M O R Y - -"
@@ -32,3 +32,4 @@ if [ "$1" == "MEM" ]; then
 elif [ "$1" == "SWAP" ]; then
 	progress_bar $SWAP_MAX $SWAP_FREE "$SWP_TEXT_L" $PROGRESS_SWAP_BG 10
 fi
+

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-source ~/.config/i3/color.sh
-source ~/.config/i3/progress-bar.sh
+source ~/.i3blocks/color.sh
+source ~/.i3blocks/progress-bar.sh
 
 function network_bytes {
 	LAST=$(cat /tmp/network-bytes.tmp)

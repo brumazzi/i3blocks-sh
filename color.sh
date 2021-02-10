@@ -10,6 +10,8 @@ export RED='#EE0505'
 export YELLOW='#EAD02B'
 export YELLOW_LIGHT='#F1E76A'
 export EARTH_OWL="#855343"
+export DARK="#262626"
+export LIGHT="#dbdbdb"
 
 export PROGRESS_OFF="#2E3436"
 export PROGRESS_MEM_BG="#C4A000"

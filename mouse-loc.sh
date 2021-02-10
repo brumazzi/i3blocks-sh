@@ -2,7 +2,7 @@
 
 # earth owl mouse position
 
-source ~/.config/i3/color.sh
+source ~/.i3blocks/color.sh
 
 MPOS=$(xdotool getmouselocation | grep -E -o "[0-9]{1,4}" | head -2)
 IFS='

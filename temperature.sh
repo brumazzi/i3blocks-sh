@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ~/.config/i3/color.sh
+source ~/.i3blocks/color.sh
 
 TEMP=$(sensors | grep Package | grep -E -o "[0-9]{1,3}.[0-9]{1}" | head -1)
 

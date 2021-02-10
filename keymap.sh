@@ -1,6 +1,6 @@
 #!/bin/sh
 
-kmap=$(cat ~/.config/i3/keymap-default)
+kmap=$(cat ~/.i3blocks/keymap-default)
 BTN=0
 [[ "$1" ]] && BTN="$1"
 
@@ -14,5 +14,5 @@ if [ "$BTN" -eq 1 ]; then
 	fi
 fi
 
-echo $kmap > ~/.config/i3/keymap-default
+echo $kmap > ~/.i3blocks/keymap-default
 echo -e "\U2328: $kmap"
